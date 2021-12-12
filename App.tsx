@@ -13,12 +13,19 @@ import { Provider } from 'react-redux';
 import {store} from './src/store/store'
 import Reservations from './src/components/Reservations';
 import Customers from './src/components/Customers';
+import { Divider } from "react-native-elements";
+import Hooks from './src/components/Hooks';
+
+
+
 
 const App = () => {
 
 
   return (
+    
     <Provider store = {store}>
+   
       <StatusBar bar-style="dark-content"/>
       <SafeAreaView>
         <ScrollView horizontal={false}>
@@ -28,8 +35,10 @@ const App = () => {
           <ScrollView horizontal={true}>
           <Customers/>
           </ScrollView>
+          <Hooks/>
 
       </SafeAreaView>
+      
 
     </Provider>
 

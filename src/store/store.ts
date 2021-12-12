@@ -8,12 +8,9 @@ export const store = configureStore({
     reducer:{
         reservations:reservationReducer,
          customer:customerReducer
-        //slice1:s
-        //slice2:ss
+        //slice1:name
+
     }
 })
-//this have to be first
 export type AppDispatch = typeof store.dispatch;
-
-//this have to be second line
-export type RootState = ReturnType<typeof store.getState>; //we need it here
+export type RootState = ReturnType<typeof store.getState>; 

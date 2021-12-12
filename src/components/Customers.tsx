@@ -7,8 +7,7 @@ import CustomerCard from './CustomerCard';
 const Customers = () => {
 
     const customers = useSelector((state:RootState) => state.customer.value);
-    
-
+  
     return(
     <View style={styles.container}>        
         <View style={styles.names}>
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
       },
       names:{
           margin:10,
-          marginTop:100,
+          marginTop:50,
           flexDirection:'row',
           marginBottom:100
       }

@@ -18,7 +18,7 @@ export default function ReservationCard({name,index}:ReservationCardType) {
             dispatch(removeReservation(index));
             dispatch(addCustomer({
                 id: guidGenerator(), //generate random unique id
-                name, //name we getting allready
+                name, //name we allready getting 
                 food:[]
             }));
                

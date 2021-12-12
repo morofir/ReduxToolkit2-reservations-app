@@ -1,18 +1,32 @@
-import React from 'react';
+import React,{useEffect, useRef,useCallback} from 'react';
 import { View, Text, Button, StyleSheet,TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReservation } from '../store/reservationSlice';
 import { RootState } from '../store/store';
 import ReservationsCard from './ReservationsCard';
 
-
 const Reservations = () => {
 
     // const [text, onChangeText] = React.useState("Full Name");
     const [reservationsNameInput,setreservationsNameInput] = React.useState("")
-    const reservations = useSelector((state:RootState) => state.reservations.value)
+    
+    const renderCount = useRef(0);
+
+
+    // const inputRef:TextInput = useRef("");
+    // const inputRef2:TextInput = useRef("");
+    const inputRef = React.createRef<TextInput>();
+    const inputRef2 = React.createRef<TextInput>();
+
+
+
+    useEffect(()=>{
+      renderCount.current = renderCount.current + 1;
+    }) 
 
     const dispatch = useDispatch();
+    const reservations = useSelector((state:RootState) => state.reservations.value)
+
 
     const handleClick= () =>{
         if(!reservationsNameInput) return; //empty value 
@@ -20,19 +34,28 @@ const Reservations = () => {
         // we need to dispatch the action
         dispatch(addReservation(reservationsNameInput));
         setreservationsNameInput("");
-
     }
     return(
-    <View style={styles.card}>
+    <View style={styles.container}>
       <TextInput
+      ref={inputRef}
         style={styles.input}
         onChangeText={setreservationsNameInput}
         value={reservationsNameInput}
         placeholder="Full Name"
         numberOfLines={1}
+        maxLength={15}
+        onSubmitEditing={() => inputRef2.current?.focus()}
+      />
+      <TextInput
+      ref={inputRef2}
+        style={styles.input}
+        maxLength={15}
+        placeholder="next"
+        numberOfLines={1}
       />
         <Button title={'Reserve a Seat'} onPress={handleClick}/>
-        
+        <Text>renderd {renderCount.current}</Text>
         <View style={styles.names}>
         {reservations.map((name,index) =>{
             return <ReservationsCard name={name} index={index}/>
@@ -64,22 +87,8 @@ const styles = StyleSheet.create({
           margin:10,
           marginTop:100,
           flexDirection:'row',
-      },
-      card:{
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: "white",
-      borderRadius: 15,
-      shadowColor: "gray",
-      shadowOffset: {width: 0, height: 0},
-      shadowOpacity: 1,
-      shadowRadius: 8,
-      elevation: 8,
-      flexDirection: 'column',
-      marginTop: 6,
-      marginBottom: 25,
-      marginLeft: 5,
-      marginRight: 5,
+          
+
       }
 });
 

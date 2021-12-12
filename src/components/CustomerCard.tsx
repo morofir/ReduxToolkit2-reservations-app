@@ -46,10 +46,10 @@ export default function CustomerCard({id,name,food}:CustomerCardType) {
 }
 const styles = StyleSheet.create({
     text:{
-        fontSize:22,
+        fontSize:18,
         padding:10,
         margin:3,
-        fontWeight:"bold"
+        marginBottom:10,
         
     },
     customer:{
